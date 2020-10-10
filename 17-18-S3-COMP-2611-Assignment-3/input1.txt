@@ -1,0 +1,35 @@
+chris24
+aliyah
+MARIA
+NiCanDer
+bRittAny
+ARiEllE
+AartI
+DoMiNiQue
+NuriYah
+nIrVaNa
+END
+
+
+aliyah 3 maria 3 chris24 10 nicander 6
+nIrVaNa 1 aliyah 10
+chris24 6 nirvana 5 maria 5 aarti 4 nicander 4 dominique 5 nuriyah 5
+MARIA 0
+NiCanDer 1 aarti 5
+AartI 1 aliyah 6
+DoMiNiQue 1 nuriyah 2
+bRittAny 2 aliyah 3 chris24 7
+ARiEllE 2 chris24 6 nicander 9
+NuriYah 1 aliyah 8
+END
+
+
+chris24
+maria
+
+
+chris24
+aliyah
+NiCanDer
+bRittAny
+END

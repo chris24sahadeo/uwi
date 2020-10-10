@@ -1,0 +1,8 @@
+A B C D END
+A 2 B 10 C 20
+B 3 A 10 C 5 D 15
+C 3 A 20 B 5 D 20
+D 2 B 15 C 20
+END
+C D
+A END

@@ -1,0 +1,12 @@
+England  Antigua 
+Dominica Canada  Belarus
+END
+Canada 2 England 40 Belarus 10
+Antigua 2 Canada 30 Belarus 50
+Dominica 1 Canada 20
+Belarus 3 Dominica 70 Canada 20 England 10
+England 1 Dominica 70
+END
+England Canada
+Antigua
+END

@@ -1,0 +1,33 @@
+==================================Part (a)==================================
+Adjacency List Representation of Graph:
+ANTIGUA -> (BELARUS, 50) (CANADA, 30) 
+BELARUS -> (CANADA, 20) (DOMINICA, 70) (ENGLAND, 10) 
+CANADA -> (BELARUS, 10) (ENGLAND, 40) 
+DOMINICA -> (CANADA, 20) 
+ENGLAND -> (DOMINICA, 70) 
+
+
+==================================Part (b)==================================
+
+
+DFS:
+ENGLAND   DOMINICA   CANADA   BELARUS   
+
+BFS:
+ENGLAND  DOMINICA  CANADA  BELARUS  
+
+DFS:
+CANADA   BELARUS   DOMINICA   ENGLAND   
+
+BFS:
+CANADA  BELARUS  ENGLAND  DOMINICA  
+
+==================================Part (c)==================================
+
+Dijkstra's starting from ANTIGUA
+KEY: [DESTINATION] [COST] [PATH]
+[ANTIGUA] [0] [ANTIGUA ]
+[BELARUS] [40] [ANTIGUA CANADA BELARUS ]
+[CANADA] [30] [ANTIGUA CANADA ]
+[DOMINICA] [110] [ANTIGUA CANADA BELARUS DOMINICA ]
+[ENGLAND] [50] [ANTIGUA CANADA BELARUS ENGLAND ]
