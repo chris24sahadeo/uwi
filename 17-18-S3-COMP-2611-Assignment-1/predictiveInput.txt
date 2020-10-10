@@ -1,0 +1,121 @@
+Test data 1
+
+n m o k l j r q p h i t s f e g v u w b c a z x y d
+$$$$
+2
+3
+4
+5
+6
+7
+8
+9
+0
+
+Output:
+2	a b c
+3	d e f
+4	g h i
+5	j k l
+6	m n o
+7	p q r s
+8	t u v
+9	w x y z
+
+-----------------------------------
+Test data 2
+
+shapeliest hellacious femininity experience antipodean 
+aphoristic ballerinas bandleader waterfront voluptuous
+supermodel sunflowers rigamarole recordable literature
+I A O t U
+$$$$
+
+7863569377
+8658788687
+2345678923
+4
+8
+2
+0
+
+Output:
+7863569377	sunflowers 
+8658788687	voluptuous
+2345678923	-
+4		I
+8		t	u 
+2		a
+-----------------------------------
+Test data 3
+
+good
+home
+Gone
+boy
+any
+hood
+HOOF
+help
+yard
+WARD
+ware
+BOX
+BOW
+cow
+$$$$
+
+4663
+269
+2345
+4357
+9273
+0
+
+Output:
+4663	Gone	good	home	hood	HOOF	
+269	any	BOW	BOX	boy	cow
+2345	-
+4357	help
+9273	WARD	ware	yard	
+-----------------------------
+Test data 4
+
+Keen Rake Dumb Smart Normal Out In Hello Sale
+see a at an and be
+see call talk
+GO SAW MEET WHAT IS HOW ARE LET HIM HER YOU
+all May Assume
+data sit sat bring sleep drink eat buy by
+for might
+January March February April June July
+want to I your
+TALL SHORT WIDE FAT NARROW SMALL BIG
+inside outside
+dictionary store stored letters letter vaild
+pale choose chosen called predictive text mobile
+Phone Spell Message Note Sake
+$$$$
+2
+4
+28
+255
+438
+3282
+5863
+7253
+43556
+7733428483
+0
+
+Output:
+2	a	
+4	I
+28	at
+255	all
+438	-
+3282	data
+5863	June
+7253	pale	Rake	Sake	Sale
+43556	Hello
+7733428483	predictive 
