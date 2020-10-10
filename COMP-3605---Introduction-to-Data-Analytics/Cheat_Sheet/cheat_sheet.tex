@@ -1,0 +1,495 @@
+% https://www.latex-tutorial.com/tutorials/
+% https://code.activestate.com/ppm/Digest-MD5/
+
+\documentclass{article}
+
+
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{relsize}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{placeins}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+
+\setlength{\parskip}{1em}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+
+
+\title{COMP3605 – Introduction to Data Analytics Cheat Sheet\\[0.005em]\smaller{}based on lecture notes by Dr. Duc The Kieu}
+\date{2018-10-13}
+\author{Christopher Sahadeo}
+
+
+\begin{document}
+
+    \maketitle
+    \tableofcontents
+
+    \newpage
+
+    % \FloatBarrier
+    \part{Key Terms}
+
+
+    \renewcommand*{\arraystretch}{1.4}
+    \newcolumntype{R}{>{\raggedleft\arraybackslash}p{3cm}}
+    \begin{longtable}{Rp{13cm}}
+        % \begin{center}
+        %     \bgroup
+        %     \def\arraystretch{1.5}
+        %     \begin{tabular}{rp{10cm}lp{15cm}}
+                \textbf{Data classification} & A two-step process, consisting of a learning (or training) step (where a classification model is constructed) and a classification step (where the model is used to predict class labels for given data)\\
+
+                \textbf{Supervised Learning} & The class label of each training tuple is provided\\
+
+                \textbf{Unupervised Learning} & The class label of each training tuple is not known\\
+
+                \textbf{Accuracy} & the percentage of test set tuples that are correctly classified by the (trained/learned) classifier\\
+
+                \textbf{$D$} & (parent set) is training set of class-labeled tuples\\
+
+                \textbf{$X_{train} = (x_1,...,x_n,y)$} & A tuple in D; an attribute/feature\\
+
+                \textbf{y} & class label attribute\\
+
+                \textbf{$D_{Test}$} & Test data containing tuples $X_{test} = (x_1,...,x_n)$ without the class attribute\\
+
+                \textbf{$m$} & The number of classes in \textbf{$D$}, each class is denoted as $C_i$ (for $i = 1, ..., m$)\\
+
+                \textbf{$C_{i, D}$} & The set of tuples of class $C_i$ in $D$\\
+
+                $\mid D \mid$ & The number of tuples in $D$\\
+
+                $\mid C_{i, D} \mid$ & The number of tuples in $C_{i, D}$\\
+
+                $v$ & The number of distinct values of attribute $A$\\
+
+                $a_j$ & A given value of attribute $A$ (for $j = 1, ..., v$)\\
+
+                $D_j$ & The set of tuples in $D$ that have outcome $a_j$ of $A$\\
+
+                $p_i$ & The nonzero probability that an arbitrary tuple in D belongs to class $C_i$\\
+
+                $Info(D)$ & Expected information needed to identify the class label of a tuple, \textbf{before} partitioning on $A$\\
+
+                $Info(D_j)$ & Expected information needed to identify the class label of a tuple, \textbf{after} partitioning on $A$\\
+
+                $Info_A(D)$ & Actual information \textbf{still} needed to identify the class label of a tuple, \textbf{after} partitioning on $A$\\
+
+                $Gain(A)$ & The attribute with the highest value is chosen as the splitting attribute, biased toward tests with many outcomes\\
+
+                $GainRatio(A)$ & The attribute with the highest value is chosen as the splitting attribute, overcomes the Information Gain bias, \textbf{but} it prefers unbalanced splits in which one partition is much smaller than the others\\
+
+                $Gini(D)$ & The subset $D_1$ or $D_2$, upon binary split, that gives \textbf{minimum} Gini index for that attribute is selected as its splitting subset, overcomes the Gain Ratio bias, \textbf{but} is biased to multivalued attributes\\
+
+                $H$ & A hypothesis that tuple $X$ belongs to a class $C$\\
+
+                $P(H|X)$ & \textbf{posterior probability, posteriori probability} the probability that tuple $X$ belongs to class $C$, given that we know the attribute description of $X$\\
+
+                $P(X|H)$ & The posterior probability that we can determine the description of $X$ given that we know $X$ belongs to class $C$\\
+
+                $P(H)$ & \textbf{prior probability, priori probability} the probability that $X$ belongs to $C$ regardless of the description of $X$\\
+
+                $P(X)$ & \textbf{A constant} the prior probability that we can determing the description of $X$ regardless of what class $X$ belongs to\\
+
+                $P(x_k|C_i)$ & The number of tuples of class $C_i$ in $D$ having the value $x_k$ for categorical attribute $A_k$, divided by $\mid C_{i,D} \mid$, the number of tuples of class $C_i$ in $D$\\
+
+                $R$ & A Rule, $R:$ IF $condition$ THEN $conclusion$\\
+
+                $n_{covers}$ & The number of tuples covered by $R$, if the condition is satisfied\\
+
+                $n_{correct}$ & The number of tuples correctly classified by $R$\\
+
+                $coverage(R)$ & The percentage of tuples that are covered by the rule (i.e., their attribute values hold true for the rule’s antecedent)\\
+
+                $accuracy(R)$ & The percentage of tuples (covered by the rule) that are correctly classified\\
+
+                 $TP$ & The number of positive tuples that were correctly labeled by the classifier\\
+
+                 $TN$ & The number of negative tuples that were correctly labeled by the classifier\\
+
+                 $FP$ & The number of negative tuples that were mislabeled as positive\\
+
+                 $FN$ & The number of positive tuples that were mislabeled as negative\\
+
+                 \textbf{Rule-Based Classification} & Learned/trained model is represented as set of IF-THEN rules. Uses either \textbf{decision tree induction} or \textbf{sequential covering algorithm}.\\
+
+                 Rule coverage (satisfied) & If condition (i.e., all the attribute tests) in rule antecedent holds true for given tuple. If a rule is satisfied, it is said to be \textbf{triggered}\\
+
+                 \textbf{Conflict Resolution} & Two or more rules are triggered, we need a conflict resolution strategy to figure out which rule gets to fire and assign its class prediction to $X$\\
+
+                 \textbf{Size ordering} & Assigns highest priority to triggering rule that has the “toughest” requirements\\
+
+                 \textbf{Classed-based Rule ordering} & All the rules for the most prevalent (or most frequent) classes come first\\
+
+                 \textbf{Rule-based Rule ordering} & Rules are organized into one long priority list, according to some measure of rule quality\\
+
+                 \textbf{Clustering} & The process of grouping set of data objects into multiple clusters (or groups) so that objects within a cluster have high similarity, but are very dissimilar to objects in other clusters\\
+
+                 \textbf{cluster} & A collection of data objects that are similar to one another within the cluster and dissimilar to objects in other clusters\\
+
+                 $p$ & An object in a cluster\\
+
+                 $c_i$ & The centroid (center/mean) of a cluster\\
+
+                 $m_i$ & The number of objects in cluster $i$\\
+
+                 $dist(x,y)$ & The Euclidean Distance between two points $x = (x_1, \dots, x_d)$ and $y = (y_1, \dots ,y_d)$\\
+
+                 $E$ & Sum of squared error (SSE) between all objects in $C_i$ and the centroid $c_i$\\
+
+                 $k$-Means Algorithm & Distributes the objects in $D$ into a set of $k$ clusters $C_1, \dots , C_k$ such that $C_i \subset D$ and $C_i \cap C_j = \emptyset$ for $1 \leq i,j \leq k$, designed to find spherical shaped clusters\\
+
+                 DBSCAN & Density-Based Spatial Clustering of Applications with Noise, finds clusters of arbitrary shape, we can model clusters as \textbf{dense regions} in the data space, separated by \textbf{sparse regions}, discovers clusters of non-spherical shape, finds \textbf{core objects} (i.e., objects that have dense neighborhoods)\\
+
+                 density & Number of objects close to $o$\\
+
+                 $\epsilon$-neighborhood & The space (region, area) within a radius $\epsilon$ centered at $o$, where $\epsilon > 0$ is a user-specified parameter\\
+
+                 $N$ & The set of objects in the $\epsilon$-neighborhood of a point $p$ under consideration\\
+
+                 $|N|$ & The number of elements in $N$\\
+
+                 core object (point) & $p$ is a core point if $|N| \geq MinPts$\\
+
+                 Border point & $q$ is not a core point (i.e., its $\epsilon$-neighborhood contains less than $MinPts$ points, $|N| < MinPts)$, but falls within the $\epsilon$-neighborhood of a core point (i.e., its $\epsilon$-neighborhood contains at least one core point)\\
+
+                 Noise point & Any point that is neither a core point nor a border point\\
+
+
+
+
+
+        %     \end{tabular}
+        %     \egroup
+        % \end{center}
+    \end{longtable}
+    % \FloatBarrier
+
+
+
+
+
+    \newpage
+    \part{Algorithms, Formulae and Examples}
+
+        \section{Measures}
+            \subsection{Distance Metrics}
+                \paragraph{Minkowski} Denoted as $L_p(x, y), L^p(x, y), p \geq 2$
+                    \begin{equation*}
+                        d_{Minkowski}(x, y) = \left (\sum_{j=1}^d \mid y_j - x_j\mid^p \right)^{\frac{1}{p}}
+                    \end{equation*}
+
+                \paragraph{Manhattan} (Minkowski with $p=1$), denoted as as $L_1(x, y), L^1(x, y)$
+                    \begin{equation*}
+                        d_{Manhattan}(x,y) = \sum_{j=1}^d\mid y_j - x_j \mid
+                    \end{equation*}
+
+                \paragraph{Euclidean} (Minkowski with $p=2$), denoted as as $L_2(x, y), L^2(x, y)$
+                    \begin{equation*}
+                        d_{Euclidean}(x,y) = \sqrt{\sum_{j=1}^d(y_j - x_j)^2}
+                    \end{equation*}
+
+                \paragraph{Cosine}
+                    \begin{align*}
+                        x\cdot y &= \sum_{j=1}^d x_j y_j\\
+                        \left \|x \right \| &= \sqrt{\sum_{j=1}^dx_j^2}\\
+                        d_{cosine}(x,y) &= \frac{x\cdot y}{\left \|x \right \| \times \left \|y \right \|}
+                    \end{align*}
+
+                \paragraph{Mahalanobis}
+                    \begin{equation*}
+                        d_{Mahalanobis}(x,y) = \sqrt{(x-y)^T\textstyle \sum^{-1} (x-y)}
+                    \end{equation*}
+                    where
+                    \begin{itemize}
+                        \item $\textstyle \sum$ is a covariance matrix
+                        \item $\textstyle \sum^{-1}$ is the inverse of $\textstyle \sum$
+                        \item $x^T$ is the transpose of $x$
+                    \end{itemize}
+
+
+                \newpage
+                \subsection{Means}
+                \subsection{Variance}
+
+
+
+
+
+
+
+        \newpage
+        \section{Classification}
+
+            \subsection{Decision Trees}
+                \begin{equation*}
+                    O(n\times \mid D \mid \times \log(\mid D \mid))
+                \end{equation*}
+
+                \begin{algorithm}
+                    \caption{Generate\_decision\_tree}
+                    \begin{algorithmic}[1]
+                        \Require{$D$, $attribute\_list$, $Attribute\_selection\_method \in \{information\_gain, gain\_ratio, gini\_index \}$}
+                        \Ensure{A decision tree}
+
+                        \Procedure{Generate\_decision\_tree}{$D, attribute\_list, Attribute\_selection\_method$}
+
+                            \State create a node $N$
+
+                            \If{$X \in C, \quad \forall X \in D$}
+                                \State \Return $N$ as leaf node labeled with class $C$
+                            \EndIf
+
+                            \If{$attribute\_list = \emptyset $}
+                                \State \Return $N$ as leaf node labeled with the majority class in $D$
+                            \EndIf
+
+                            \State apply \Call{Attribute\_selection\_method}{$D, attribute\_list$} to \textbf{ find } the "best" $splitting\_criterion$
+
+                            \If{$splitting\_attribute$ is discrete \textbf{ and } multiway splits allowed}
+                                \State $attribute\_list \gets attribute\_list - splitting\_attribute$
+                            \EndIf
+
+                            \ForEach{outcome $j$ of $splitting\_criterion$}
+                                \If{$D_j = \emptyset$}
+                                    \State attach a leaf labeled with the majority class in $D$ to node $N$
+                                \Else
+                                    \State attach the node returned by \Call{Generate\_decision\_tree}{$D_j, attribute\_list$} to node $N$
+                                \EndIf
+                            \EndFor
+
+                            \State \Return $N$
+                        \EndProcedure
+                    \end{algorithmic}
+                \end{algorithm}
+
+
+
+                \newpage
+                \subsubsection{Information Gain (ID3)}
+                    \begin{align*}
+                        p_i &= \frac{\mid C_{i, D} \mid}{\mid D \mid}\\
+                        Info(D) &= -\sum_{i=1}^mp_i\log_2(p_i)\\
+                        p_{i,j} &= \frac{\mid C_{i, D_j} \mid}{\mid D_j \mid}\\
+                        Info(D_j) &= -\sum_{i=1}^mp_{i,j}\log_2(p_{i,j})\\
+                        Info_A(D) &= \sum_{j=1}^v\frac{\mid D_j \mid}{\mid D \mid} \times Info(D_j)\\
+                        Gain(A) &= Info(D) - Info_A(D)\\
+                        0\log_2 0 &= 0
+                    \end{align*}
+                    \begin{center}
+                        \href{https://github.com/chris24s/COMP3605-Introduction-to-Data-Analytics-Cheat-Sheet/blob/master/Examples/1.%20Classification/Information%20Gain%20(ID3)%20example.pdf}{Click here for Example}
+                    \end{center}
+
+
+                \subsubsection{Gain Ratio (C4.5)}
+                    \begin{align*}
+                        SplitInfo_A(D) &= -\sum_{j=1}^v\frac{\mid D_j \mid}{\mid D \mid}\times \log_2\left(\frac{\mid D_j \mid}{\mid D \mid} \right)\\
+                        GainRatio(A) &= \frac{Gain(A)}{SplitInfo_A(D)}\\
+                    \end{align*}
+                    \begin{center}
+                        \href{https://github.com/chris24s/COMP3605-Introduction-to-Data-Analytics-Cheat-Sheet/blob/master/Examples/1.%20Classification/Gain%20Ratio%20(C4.5)%20example.pdf}{Click here for Example}
+                    \end{center}
+
+
+                \subsubsection{Gini Index (CART)}
+                    \begin{equation*}
+                        Gini(D) &= 1 - \sum_{i=1}^mp_i^2
+                    \end{equation*}
+
+                    \paragraph{Determines the splitting attribute and splitting subsets:}
+                    \begin{equation*}
+                        Gini_A(D) &= \frac{\mid D_1 \mid}{\mid D \mid}Gini(D_1) + \frac{\mid D_2 \mid}{\mid D \mid}Gini(D_2)
+                    \end{equation*}
+
+                    \paragraph{Determines the reduction in impurtiy:}
+                    \begin{equation*}
+                        \Delta Gini(A) &= Gini(D) - Gini_A(D)
+                    \end{equation*}
+                    \begin{center}
+                        \href{https://github.com/chris24s/COMP3605-Introduction-to-Data-Analytics-Cheat-Sheet/blob/master/Examples/1.%20Classification/Information%20Gain%20(ID3)%20example.pdf}{Click here for Example}
+                    \end{center}
+
+
+
+            \newpage
+            \subsection{Na\"{i}ve Bayesian Classification}
+                \begin{equation*}
+                    P(x_k|C_i) &= \frac{\mid C_{i,x_k} \mid}{\mid C_{i,D} \mid}\\
+                \end{equation*}
+
+                \paragraph{Laplacian Correction if $P(x_k|C_i) = 0$:}
+                    If we have $q$ counts to which we each add one, then we must remember to add $q$ to the corresponding denominator used in the probability calculation
+
+
+                \begin{align*}
+                    P(X|C_i) &= \displaystyle \prod_{k=1}^nP(x_k|C_i)\\\\
+                    P(C_i|X) &= \frac{P(X|C_i)P(C_i)}{P(X)}\\
+                \end{align*}
+
+                \paragraph{Case 1}
+                    If $P(C_i)$ is known, then we calculate it by              $\displaystyle P(C_i) = \frac{\mid C_{i,D} \mid}{\mid D \mid}$
+                    and we maximize $$P(X|C_i)P(C_i) > P(X|C_j)P(C_j) \text{ for } 1 \leq j \leq m, j \neq i$$
+
+                \paragraph{Case 2}
+                    If $P(C_i)$ is unknown, then we assume $P(C_i) = P(C_j)$ and we maximize
+                    $$P(X|C_i) > P(X|C_j)$$
+
+                \begin{center}
+                    \href{https://github.com/chris24s/COMP3605-Introduction-to-Data-Analytics-Cheat-Sheet/blob/master/Examples/1.%20Classification/Naive%20Baysian%20Classifier%20example.pdf}{Click here for Example}
+                \end{center}
+
+
+            \newpage
+            \subsection{Rule-Based Classification TBC}
+                \begin{align*}
+                    coverage(R) &= \frac{n_{covers}}{\mid D \mid}\\
+                    accuracy(R) &= \frac{n_{correct}}{n_{covers}}\\
+                \end{align*}
+
+                \begin{algorithm}
+                    \caption{Sequential Covering Algorithm}
+                    \begin{algorithmic}[1]
+                        \Require{$D, Att\_vals$}
+                        \Ensure{A set of IF-THEN rules}
+
+                        \Procedure{Sequential Covering}{$D, Att\_vals$}
+                            \State $R\_set = \{\}$
+                            \ForEach{class $c$}
+                                \Repeat
+                                    \State $R$ = \Call{Learn\_One\_Rule}{$D, Att\_vals, c$}
+                                    \State remove tuples covered by $R$ from $D$
+                                    \State $R\_set = R\_set + R$
+                                \Until{terminating condition}
+                            \EndFor
+                            \State \Return $R\_set$
+                        \EndProcedure
+                    \end{algorithmic}
+                \end{algorithm}
+
+                \begin{equation*}
+                    FOIL\_Gain = pos'\times \left(\log_2\frac{pos'}{pos'+neg'} - \log_2\frac{pos}{pos+neg} \right)
+                \end{equation*}
+
+
+
+
+            \newpage
+            \subsection{Evaluate Classifier Performance}
+                \begin{center}
+                    \textbf{Predicted Class} \\
+                    \begin{tabular}{|r|c|c|c|c|}
+                        \hline
+                        & & yes & no & Total \\
+                        \hline
+                        \textbf{Actual class}| & yes & TP & FN & P \\
+                        \hline
+                        & no & FP & TN & N \\
+                        \hline
+                        & Total & P' & N' & P + N \\
+                        \hline
+
+                    \end{tabular}
+                    \\ Confusion Matrix
+                \end{center}
+
+                \begin{align*}
+                    accuracy &= \frac{TP + TN}{P + N}\\
+                    error\_rate &= \frac{FP + FN}{P + N}\\
+                    sensitivity, true\_positive\_rate, recall &= \frac{TP}{P}\\
+                    specificity, true\_negative\_rate &= \frac{TN}{N}\\
+                    precision &= \frac{TP}{TP + FP}\\
+                    F_1 &= \frac{2\times precision \times sensitivity}{precision + sensitivity}\\
+                    F_\beta &= \frac{(1 + \beta^2)\times precision\times sensitivity}{\beta^2\times precision + sensitivity}, \beta \in \mathbb{R}, \beta \geq 0\\
+                \end{align*}
+
+                \begin{center}
+                    \href{https://github.com/chris24s/COMP3605-Introduction-to-Data-Analytics-Cheat-Sheet/blob/master/Examples/1.%20Classification/Evaluate%20Classifier%20Performance%20example.pdf}{Click here for Example}
+                \end{center}
+
+
+        \newpage
+        \section{Advanced Classification}
+            \subsection{k-Nearest Neighbors Classification}
+            \subsection{Classification Using Frequent Patterns}
+            \subsection{Support Vector Machines (SVMs)}
+            \subsection{Classification by Backpropagation (ANNs)}
+            \subsection{Bayesian Belief Networks}
+            \subsection{Other Classification Methods}
+
+
+        \newpage
+        \section{Clustering}
+            \subsection{k-Means Algorithm (partitioning based)}
+                \begin{align*}
+                    c_i &= \frac{1}{m_i}\sum_{p\in C_i}p\\
+                    dist(x,y) &= \sqrt{\sum_{j=1}^d(y_j-x_j)^2}\\
+                    E &= \sum_{i=1}^k\sum_{p \in C_i}dist(p,c_i)^2\\
+                \end{align*}
+
+                \begin{algorithm}
+                    \caption{k-Means}
+                    \begin{algorithmic}[1]
+                        \Require{$k, D$}
+                        \Ensure{A set of $k$ clusters $C_1, \dots , C_k$ such that $C_i \subset D$ and $C_i \cap C_j = \emptyset$ for $1 \leq i,j \leq k$}
+
+                        \Procedure{$k$-Means}{$k, D$}
+                            \State Randomly choose $k$ objects from $D$ as initial centroids
+                            \Repeat
+                                \State (re)assign each object to the cluster to which the object is the most similar
+                                \State recalculate the centroids
+                            \Until{centroids do not change}
+                        \EndProcedure
+                    \end{algorithmic}
+                \end{algorithm}
+
+                \begin{center}
+                    \href{https://github.com/chris24s/COMP3605-Introduction-to-Data-Analytics-Cheat-Sheet/blob/master/Examples/2.%20Clustering/k-Means%20Example.pdf}{Click here for Example}
+                \end{center}
+
+
+            \newpage
+            \subsection{DBSCAN Algorithm (density based) TBC}
+                Density-Based Spatial Clustering of Applications with Noise
+
+
+
+
+            \newpage
+            \subsection{Evaluate Clustering Performance}
+
+
+        \newpage
+        \section{Outlier Detection}
+            \subsection{Classification-Based Approaches}
+            \subsection{Clustering-Based Approaches}
+            \subsection{Proximity-Based Approaches}
+            \subsection{Distance-Based Approaches}
+            \subsection{Density-Based Approaches}
+            \subsection{Statistical Approaches}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
