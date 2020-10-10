@@ -1,0 +1,38 @@
+1.	INFIX		: 4*2^(2*3)
+	POSTFIX		: 4223*^*
+	EVALUATION	: 256
+
+2.	INFIX		: 4*(8-6)^(9-5)-8*2
+	POSTFIX		: 486-95-^*82*-
+	EVALUATION	: 48
+
+3.	INFIX		: 4*(7-6)/(9-5))-8*8
+	Error: more right than left parentheses!
+
+4.	INFIX		: (8+6*5)/(8-3*2)
+	POSTFIX		: 865*+832*-/
+	EVALUATION	: 19
+
+5.	INFIX		: 4*(8-3)^(((7-5))-8*8
+	Error: more left than right parentheses!
+
+6.	INFIX		: (9-7)*((5-4*2)/3/5)*2
+	POSTFIX		: 97-542*-3/5/*2*
+	EVALUATION	: -0.8
+
+7.	INFIX		: (8+4)/(5-5)
+	POSTFIX		: 84+55-/
+	EVALUATION	: Division by zero detected. Result is undefined!
+
+8.	INFIX		: (8/2/2)-3^2
+	POSTFIX		: 82/2/32^-
+	EVALUATION	: -7
+
+9.	INFIX		: 9/0
+	POSTFIX		: 90/
+	EVALUATION	: Division by zero detected. Result is undefined!
+
+10.	INFIX		: 1+(2*3-(4/5^6)*7)*8
+	POSTFIX		: 123*456^/7*-8*+
+	EVALUATION	: 48.9857
+

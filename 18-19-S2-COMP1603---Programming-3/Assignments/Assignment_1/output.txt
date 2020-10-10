@@ -1,0 +1,18 @@
+ID		Mathematics Mark	Mathematics Grade	English Mark	English Grade
+1000			50				D				78				C				
+2000			63				C				89				B				
+3000			97				A				75				C				
+4000			68				C				62				C				
+5000			74				C				59				D				
+6000			98				A				61				C				
+7000			49				F				51				D				
+8000			26				F				47				F				
+9000			83				B				91				A				
+10000			76				C				100				A				
+1343			0				F				0				F				
+
+Number of candidates : 11
+Highest mark in Mathematics : 98
+Highest mark in English : 100
+Average mark in Mathematics : 62.1818
+Average mark in English : 64.8182
